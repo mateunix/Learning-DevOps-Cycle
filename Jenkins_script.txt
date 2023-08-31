@@ -1,0 +1,13 @@
+node{
+    stage('build'){
+        sh 'python3 -V'
+    }
+    stage('test'){
+        git branch:'main', url:'https://github.com/mateunix/Somativa-DevOps.git'
+        sh 'python3 Hello.py'
+    }
+    stage('deploy'){
+        echo "finished :D"
+    }
+    
+}

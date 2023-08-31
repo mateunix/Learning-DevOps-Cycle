@@ -1,0 +1,17 @@
+image: python
+
+stages:
+    - build
+    - test
+    - deploy
+build:
+    stage: build
+    script:
+      - python3 -V
+test:
+    stage: test
+    script:
+        - python3 Hello.py
+deploy:
+    stage: deploy
+    script: echo 'finished :D'
