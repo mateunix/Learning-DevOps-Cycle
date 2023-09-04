@@ -1,7 +1,7 @@
 <?php
 	$pactive = $_SERVER['PHP_SELF'];
 	$components = explode('/', $pactive);
-	$page = $components[2];
+	$page = isset($components[2]);
 	
 	
 ?>

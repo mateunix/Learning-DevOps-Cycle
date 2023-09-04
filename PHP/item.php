@@ -1,8 +1,9 @@
 <?php
 	
 	require "includes/connection.php";
-	include "includes/head.php";
 	require "includes/authentication.php";
+	include "includes/head.php";
+	
 	
 ?>
 	
