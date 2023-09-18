@@ -1,5 +1,30 @@
 version: '3.8'
 services:
+  jenkins:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    privileged: true
+    user: root
+    ports:
+      - 8079:8080
+      - 50001:50000
+    container_name: jenkins
+    volumes:
+        - /home/mateus/Documents/PUCPR/DevOPS/Somativa2/jenkins_compose/jenkins_configuration:/var/jenkins_home
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /usr/local/bin/docker:/usr/local/bin/docker
+  agent:
+    image: jenkins/ssh-agent:jdk11
+    privileged: true
+    user: root
+    container_name: agent
+    expose:
+      - 22
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCrQhqwXBSzheIRmU1WZxDW51UvSnSBzyThSeDpwBPM9LRFjI58GlzxiLUYlcEsKH6egpFvl+0T0frBY0XYOyk/2yD0zEVfSuZKOKdt+WEGikK+q16zbmw5jhKAduYxEHssN7Pcv9toGA2gdTU3lrypcss7h8NiGfA2MbLixzyKUS+gi9M21CnGa/vLgRBM6msB8+jhIloYGg/mXoLVNzhygIoi8xD8wAPkQ9YdZZ0dCQfYufsioyRU2hA61i58TeO7a2RFC/JaPhqY8ZJQ9SLNWMPNZ4w8QhyEjy8FU/IgCxu+G2KJZbXD//uC8mVaL/Baxd1jFJFVjh5Pui8fmzars5YR82xHu8RyBd2SEFT22OCPf8CdyIakWA/NEqmL/Mb7dpBAqartPfzA0JBkx9K3P/FfY2dVqGmiLSIdzLBuKfnbUcNPUIULwKeWiT5nvfmypCK8ZtBxe28kIrxHl3Qy4D3wzMpFvGYNjpMdWRAexly+C1EgZFZ/hNz9GTlWiNM= mateus@deb
+
+
   php:
     build: ./PHP
     container_name: php-apache
